@@ -30,10 +30,11 @@ public class TwitterTopology {
         config.setDebug(true);
         config.setNumWorkers(5);
         config.put("cassandra-node", "localhost");
+        config.put("redis-server", "localhost");
 
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("Test", config, builder.createTopology());
-        Utils.sleep(60000);
+        Utils.sleep(60000*10);
         cluster.killTopology("Test");
         cluster.shutdown();
     }

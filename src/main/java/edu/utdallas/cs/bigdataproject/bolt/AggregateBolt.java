@@ -14,9 +14,8 @@ import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 
-import edu.utdallas.cs.bigdataproject.cassandra.CassandraClient;
-import edu.utdallas.cs.bigdataproject.storage.CassandraHashtagCounter;
 import edu.utdallas.cs.bigdataproject.storage.HashtagCounter;
+import edu.utdallas.cs.bigdataproject.storage.RedisHashtagCounter;
 
 public class AggregateBolt implements IRichBolt {
     OutputCollector collector;
@@ -27,18 +26,22 @@ public class AggregateBolt implements IRichBolt {
     int batchIntervalInSec = 45;
     long lastBatchProcessTimeSeconds = 0;
 
-    CassandraClient client;
+    // CassandraClient client;
     HashtagCounter hashtagCounter;
 
     public void prepare(Map conf, TopologyContext context,
                         OutputCollector collector) {
         this.collector = collector;
 
-        String cassandraNode = (String)conf.get("cassandra-node");
+        /*String cassandraNode = (String)conf.get("cassandra-node");
         client = new CassandraClient();
         client.connect(cassandraNode);
 
-        hashtagCounter = new CassandraHashtagCounter(client);
+        hashtagCounter = new CassandraHashtagCounter(client);*/
+
+        hashtagCounter = new RedisHashtagCounter(
+            (String)conf.get("redis-server")
+        );
     }
 
     public boolean isTickTuple(Tuple tuple) {
@@ -102,7 +105,7 @@ public class AggregateBolt implements IRichBolt {
     }
 
     public void cleanup() {
-        client.close();
+        // client.close();
     }
 
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
