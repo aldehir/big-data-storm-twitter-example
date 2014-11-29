@@ -10,7 +10,10 @@ import backtype.storm.utils.Utils;
 
 import edu.utdallas.cs.bigdataproject.bolt.AggregateBolt;
 import edu.utdallas.cs.bigdataproject.bolt.HashTagTokenizeBolt;
+import edu.utdallas.cs.bigdataproject.cassandra.CassandraClient;
 import edu.utdallas.cs.bigdataproject.spout.TwitterStreamSpout;
+import edu.utdallas.cs.bigdataproject.storage.CassandraHashtagCounter;
+import edu.utdallas.cs.bigdataproject.storage.HashtagCounter;
 
 public class TwitterTopology {
     public static void main(String[] args) {
@@ -26,6 +29,7 @@ public class TwitterTopology {
         Config config = new Config();
         config.setDebug(true);
         config.setNumWorkers(5);
+        config.put("cassandra-node", "localhost");
 
         LocalCluster cluster = new LocalCluster();
         cluster.submitTopology("Test", config, builder.createTopology());
