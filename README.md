@@ -11,9 +11,11 @@ accumulates counts in a Redis instance.
 Install through your distribution's package manager.
 
 ***Ubuntu***
+
     $ sudo apt-get install maven
 
 ***Fedora***
+
     $ sudo yum install maven
 
 ### Installing Apache Storm
@@ -23,17 +25,21 @@ Unpackage storm and add the bin/ directory to your PATH environment variable.
 Install through your distribution's package manager.
 
 ***Ubuntu***
+
     $ sudo apt-get install redis-server
 
 ***Fedora***
+
     $ sudo yum install redis
 
 Start up the redis server:
 
 ***Ubuntu****
+
     $ sudo service redis-server start
 
 ***Fedora***
+
     $ sudo systemctl start redis
 
 ## Compiling
@@ -42,7 +48,7 @@ Building using Maven.
     $ mvn package
 
 ## Set up Twitter's API Credentials
-1. Create a Twitter application through (https://dev.twitter.com/)[https://dev.twitter.com/].
+1. Create a Twitter application through [https://dev.twitter.com/](https://dev.twitter.com/).
 2. Create an access token for your application.
 3. Under `src/main/resources/` copy `twitter4j.sample.properties` to
    `twitter4j.properties` and configure with your OAuth consumer key, OAuth
