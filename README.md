@@ -42,17 +42,19 @@ Start up the redis server:
 
     $ sudo systemctl start redis
 
-## Compiling
-Building using Maven.
-
-    $ mvn package
-
 ## Set up Twitter's API Credentials
 1. Create a Twitter application through [https://dev.twitter.com/](https://dev.twitter.com/).
 2. Create an access token for your application.
 3. Under `src/main/resources/` copy `twitter4j.sample.properties` to
    `twitter4j.properties` and configure with your OAuth consumer key, OAuth
    consumer secret, access token and access token secret.
+
+Note: this must be configured before compiling.
+
+## Compiling
+Building using Maven.
+
+    $ mvn package
 
 ## Running locally
 Requires Redis to be running locally.
